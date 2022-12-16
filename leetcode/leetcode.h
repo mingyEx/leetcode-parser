@@ -5,7 +5,6 @@
 #include<regex>
 #include<sstream>
 #include<string>
-#include<climits>
 #include<type_traits>
 using std::cout;
 using std::endl;
@@ -76,7 +75,7 @@ namespace lc
     return ret;
   }
   template<typename T>
-  std::vector<std::vector<int>> Vec2(const std::string inputStr)
+  std::vector<std::vector<T>> Vec2(const std::string inputStr)
   {
     std::vector<std::vector<T>> ret;
     const std::string pattern = R"((\[[^\[\]]*\]))";
@@ -87,16 +86,13 @@ namespace lc
       ret.push_back(Vec<int>(vec));
       log = match.suffix();
     }
-    if (ret.empty()) {
+    if (ret.empty()) { 
       ret = {};
-      std::cout << "Construct vector<vector<int>>failed" << std::endl;
-    }
+      std::cout << "Construct vector<vector<int>>failed" <<std::endl; }
     return ret;
   }
 
-  //string
-    //from:https://leetcode.cn/playground/new/empty/
-
+  //string from:https://leetcode.cn/playground/new/empty/
   inline vector<string> VecStr(const string input) {
     if (input.size() < 2) {
       std::cout << "Construct vector<string> failed" << std::endl;
@@ -151,6 +147,16 @@ namespace lc
     }
     if (ret.empty()) std::cout << "Construct vector<vector<string>> failed" << std::endl;
     return ret;
+  }
+
+  template<>
+  inline std::vector<string> Vec(const std::string inputStr) {
+    return VecStr(inputStr);
+  }
+  template<>
+  inline std::vector<std::vector<string>> Vec2(const std::string inputStr)
+  {
+    return Vec2Str(inputStr);
   }
 
   class Tree

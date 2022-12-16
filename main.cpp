@@ -1,14 +1,10 @@
-﻿// leetcode-parser.cpp : Defines the entry point for the application.
-//
-
+﻿//main.cpp : Defines the entry point for the application.
 #include<vector>
 #include<string>
 #include<map>
 #include<algorithm>	
 #include <unordered_map>
-#include<iostream>
 #include<bitset>
-#include<algorithm>
 #include<fstream>
 #include<numeric>
 #include<set>
@@ -25,7 +21,7 @@
 #include"leetcode.h"
 using namespace std;
 using namespace lc;
-auto stc(vector<string>& t1)
+auto string_to_char(vector<string>& t1)
 {
   vector<vector<char>> t;
   for (auto i : t1)
@@ -37,15 +33,18 @@ auto stc(vector<string>& t1)
   return t;
 }
 
-
 int main()
 {
-  std::ifstream file("in.txt");
+  std::string filename = "in.txt";
+  std::ifstream file(filename); //默认的不是这个位置吗？
+    if (!file.is_open()) {
+    std::cout << "failed to open ,Please create `in.txt` in the current directory as the input file" << filename << '\n';
+  }
   std::string in;
   std::getline(file, in);
-  auto res = lc::VecStr(in);  //还是不行.
-  for (auto i : res)cout << i << " ";
+  auto res = Tree(in);
+  res.print();
+  //your solution here...
+  
   return 0;
 }
-//你可能会发现它很有用
-

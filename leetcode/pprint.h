@@ -8,6 +8,7 @@
 #include<set>
 #include<valarray>
 #include<type_traits>
+#include<memory>
 namespace pretty_print
 {
   namespace detail
@@ -16,6 +17,7 @@ namespace pretty_print
     using simple_add_pointer_t = T*;
     template<typename T>
     inline constexpr bool has_const_iterator_v = requires{ typename simple_add_pointer_t<typename T::const_iterator>; };
+    
     template <typename T>
     struct has_begin_end
     {
@@ -35,10 +37,10 @@ namespace pretty_print
     };
   }
 
-  //delimiters:`, `¡£
+  //delimiters:`, `ï¿½ï¿½
   //pair/tuple : ()
-  //set :{}¡£
-  //other contains£º[]¡£
+  //set :{}ï¿½ï¿½
+  //other containsï¿½ï¿½[]ï¿½ï¿½
 
   template <typename TChar>
   struct delimiters_values
@@ -113,7 +115,7 @@ namespace pretty_print
 
   //member_template
 
-  //Specialization printing logic for std::pairs£¬
+  //Specialization printing logic for std::pairsï¿½ï¿½
   template <
     typename T,
     typename TChar,
@@ -146,7 +148,7 @@ namespace pretty_print
     using ostream_type = typename print_container_helper<T, TChar, TCharTraits, TDelimiters>::ostream_type;
     using element_type = std::tuple<Args...>;
     template <std::size_t I> struct Int { };
-    static void print_body(const element_type& c, ostream_type& stream)		//ÊÇÖØÔØ
+    static void print_body(const element_type& c, ostream_type& stream)		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
       tuple_print(c, stream, Int<0>());
     }
@@ -179,7 +181,7 @@ namespace pretty_print
     return stream;
   }
 
-  //basic£ºintegral_constant: base class for the C++ type traits.If the second argument is true, is_container contains value==true.
+  //basicï¿½ï¿½integral_constant: base class for the C++ type traits.If the second argument is true, is_container contains value==true.
   // Basic is_container template;specialize to derive from std::true_type for all desired container types
   template <typename T>
   struct is_container : public std::integral_constant<bool,
@@ -189,7 +191,7 @@ namespace pretty_print
     detail::has_begin_end<T>::end_value> { };
 
   template <typename T, std::size_t N>
-  struct is_container<T[N]> : std::true_type { };	//Ô­ÉúÊý×é
+  struct is_container<T[N]> : std::true_type { };	//Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
   template <std::size_t N>
   struct is_container<char[N]> : std::false_type { };
@@ -306,7 +308,6 @@ namespace pretty_print
   {
     template <typename T>
     custom_delims(const T& c) : base(new custom_delims_wrapper<T, Delims>(c)) { }
-
     std::unique_ptr<custom_delims_base> base;
   };
 
@@ -383,7 +384,7 @@ namespace std
   // Prints a container to the stream using default delimiters
   template<typename T, typename TChar, typename TCharTraits>
   inline typename std::enable_if_t< ::pretty_print::is_container<T>::value, basic_ostream<TChar, TCharTraits>&>
-    //enable_if_t :Ìá¹©µÚ¶þ¸ö²ÎÊý×÷ÎªÀàÐÍ£¬Ö»ÓÐÒ»¸öÔòÎªvoid,·ñÔòÎÞ´Ëº¯Êý
+    //enable_if_t :ï¿½á¹©ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Í£ï¿½Ö»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Îªvoid,ï¿½ï¿½ï¿½ï¿½ï¿½Þ´Ëºï¿½ï¿½ï¿½
     operator<<(basic_ostream<TChar, TCharTraits>& stream, const T& container)
   {
     return stream << ::pretty_print::print_container_helper<T, TChar, TCharTraits>(container);

@@ -39,6 +39,7 @@ int main()
   std::ifstream file(filename); //默认的不是这个位置吗？
     if (!file.is_open()) {
     std::cout << "failed to open ,Please create `in.txt` in the current directory as the input file" << filename << '\n';
+    return 0;
   }
   std::string in;
   std::getline(file, in);

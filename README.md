@@ -11,7 +11,7 @@ Helps to debug `leetcode` problems in IDE
 [boost-describe](https://www.boost.org/doc/libs/develop/libs/describe/) when debug [design problems](https://leetcode.com/tag/design/)
 
 ### Todo :   
-#### -1. Use cmake to organize files
+
 #### 0.Support for more complex input parameter types
 - [ ] implementing a `json parser`-like function to support two-dimensional vector containing more than one types.   
 for example `[[], ["leetcode"], [4], ["practice"], [3], [8], [10], [2], [6]]` in  [2296](https://leetcode.com/problems/design-a-text-editor/)  

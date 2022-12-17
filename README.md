@@ -25,6 +25,8 @@ example:`[[], ["leetcode"], [4], ["practice"], [3], [8], [10], [2], [6]]` in  [2
 
 2.Treat [n-ary-tree](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/) as graphs  
 
+### todo
+add [inliner](https://github.com/slycelote/caide/blob/release/libcaide/README.md#c-code-inliner) 
 ### Any feature improvement suggestions are welcome
 
 ### Thanks

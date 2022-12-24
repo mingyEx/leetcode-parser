@@ -6,6 +6,7 @@
 #include<sstream>
 #include<string>
 #include<type_traits>
+#include <climits>
 using std::cout;
 using std::endl;
 using std::vector;

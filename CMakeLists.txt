@@ -1,4 +1,4 @@
-﻿# CMakeList.txt : CMake project for leetcode-parser, include source and define
+# CMakeList.txt : CMake project for leetcode-parser, include source and define
 cmake_minimum_required(VERSION 3.10)
 
 if (UNIX)
@@ -13,6 +13,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_subdirectory(leetcode)
 
 add_executable(main main.cpp)
+
+#from https://stackoverflow.com/a/46995969/13792395
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/in.txt
+        ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
 target_link_libraries(main PUBLIC leetcode)
 

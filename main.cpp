@@ -33,19 +33,18 @@ auto string_to_char(vector<string>& t1)
   return t;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-  std::string filename = "in.txt";
-  std::ifstream file(filename); //默认的不是这个位置吗？
-    if (!file.is_open()) {
-    std::cout << "failed to open ,Please create `in.txt` in the current directory as the input file" << filename << '\n';
-    return 0;
-  }
+  std::ifstream file("in.txt");
   std::string in;
   std::getline(file, in);
-  auto res = Tree(in);
-  res.print();
-  //your solution here...
-  
+  int caseN = 0;
+  while (file.peek() != EOF)
+  {
+    cout << "case " << caseN << ":"<<endl;
+    std::getline(file, in);
+    auto t1 = Vec<int>(in);
+    //cout << Solution().swapNodes(t1.get(), 2) << endl;
+  }
   return 0;
 }

@@ -33,6 +33,17 @@ auto string_to_char(vector<string>& t1)
   return t;
 }
 
+//[[],[],[]] -> _,_ \n -,_\n ,
+auto graph_data(vector<vector<int>> edges)
+{
+  string r;
+  for (auto i : edges) {
+    r = r + to_string(i[0]) + "," + to_string(i[1]);
+    r.push_back('\n');
+  }
+  return r;
+}
+
 int main(int argc, char* argv[])
 {
   std::ifstream file("in.txt");

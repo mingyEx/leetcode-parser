@@ -130,6 +130,7 @@ typedef vector<int> vi;
 typedef vector<vi> vii;
 //#define ed ;
 
+// template <typename... Ts> auto xxx(Ts&& ... ts) { return func(std::forward<Ts>(ts)...); }
 class Solution {
   // your solution here...
 };

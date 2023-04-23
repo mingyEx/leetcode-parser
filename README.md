@@ -14,7 +14,8 @@ Helps to debug `leetcode` problems in IDE
 2. Create a 2D array : `Vec2<int>`/`Vec2<string>`
 3. Create a linked list : `List()`
 4. Create a tree : `Tree()`
-
+5. Print `vector/string/map...` : `D(name)`
+6. Print `Tree/List/priority_queue` : `name.print()`
 
 ### note
 0.`lintcode`/`codewars` users need to replace `{}` with `[]` and `#` with `null`  

@@ -99,13 +99,19 @@ constexpr int mod = 1e9 + 7;
 template<class T> inline T lowbit(T n) { return (n ^ (n - 1)) & n; }  // 6(110)->2(10)
 template<class T> inline int countbit(T n) { return (n == 0) ? 0 : (1 + countbit(n & (n - 1))); }//1 in binary represent
 
-//use to print value,from https://stackoverflow.com/a/61925948/13792395
-template<class T, class C = vector<T>, class P = less<typename C::value_type> >
-struct heapq :std::priority_queue<T, C, P> {
-  using priority_queue<T, C, P>::priority_queue;
-  typename C::iterator begin() { return std::priority_queue<T, C, P>::c.begin(); }
-  typename C::iterator end() { return std::priority_queue<T, C, P>::c.end(); }
-};
+template <class T, class S, class C>
+S& Container(priority_queue<T, S, C>& q) {
+struct HackedQueue : private priority_queue<T, S, C>{
+    static S& Container(priority_queue<T, S, C>& q){
+      return q.* & HackedQueue::c;;
+    }
+  };
+  return HackedQueue::Container(q);
+}
+vector<int> print(priority_queue<int> pq) {
+  auto res = Container(pq);
+  return res;
+}
 
 template<typename T> void UN(T& n) { sort(all(n)); n.erase(std::unique(n.begin(), n.end()), n.end()); }
 template<class T> using pqg = priority_queue<T, vector<T>, greater<T>>; //Small root heap. Default is big root heap.

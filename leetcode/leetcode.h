@@ -175,8 +175,20 @@ namespace lc
       return r;
     }
   public:
-    Tree(const std::string& input);
+    explicit Tree() :root(nullptr) {};
+    explicit Tree(const std::string& input);
     Tree(TreeNode* p) { root = copyTree(p); }
+    Tree(const Tree& other) {
+      root = copyTree(other.root);
+    }
+    Tree& operator=(const Tree& other) {
+      root = copyTree(other.root);
+      return *this;
+    }
+    Tree& operator=(Tree&& p) {
+      std::swap(p.root, root);
+      return *this;
+    }
     ~Tree();
     TreeNode* get() { return root; }
     void print();

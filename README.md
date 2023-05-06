@@ -16,8 +16,6 @@ Helps to debug `leetcode` problems in IDE
 4. Create a tree : `Tree()`
 5. Print `vector/string/map...` : `D(name)`
 6. Print `Tree/List/priority_queue` : `name.print()`
->Note:If you want to print the intermediate results, you should copy a `Tree/List` inside your function and use it to call the print() function, if you want to see the results, you should use t.print() directly, and should not reassign t with the return value of Solution(), unless you are returning a `new` pointer.
->example:[cousins-in-binary-tree-ii](https://leetcode.cn/submissions/detail/430064249/)
 
 ### note
 0.`lintcode`/`codewars` users need to replace `{}` with `[]` and `#` with `null`  

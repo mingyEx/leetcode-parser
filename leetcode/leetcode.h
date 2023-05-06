@@ -181,12 +181,16 @@ namespace lc
     Tree(const Tree& other) {
       root = copyTree(other.root);
     }
+    Tree(Tree&& other)
+    {
+      std::swap(other.root, root);
+    }
     Tree& operator=(const Tree& other) {
       root = copyTree(other.root);
       return *this;
     }
-    Tree& operator=(Tree&& p) {
-      std::swap(p.root, root);
+    Tree& operator=(Tree&& other) {
+      std::swap(other.root, root);
       return *this;
     }
     ~Tree();

@@ -29,8 +29,11 @@ example:`[[], ["leetcode"], [4], ["practice"], [3], [8], [10], [2], [6]]` in  [2
 3.if you are having problems with array subscript overflow, you can choose to turn on the `(/fsanitize=address)` option in `visual studio` and set the configuration to `release` to get the same output as `leetcode`,and get the actual line number of the code location where the error occurred.
 
 ### todo
-add [inliner](https://github.com/slycelote/caide/blob/release/libcaide/README.md#c-code-inliner) 
+1.add [inliner](https://github.com/slycelote/caide/blob/release/libcaide/README.md#c-code-inliner)   
+2.use `std::setw(9)`,`cout.width(9)`; to align the output to the right, which helps debug problems with grid
+
 ### Any feature improvement suggestions are welcome
+
 
 ### Thanks
 [pprint](https://louisdx.github.io/cxx-prettyprint/)  

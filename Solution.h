@@ -8,7 +8,7 @@
 #include<algorithm>
 #include<fstream>
 #include<numeric>
-//#include<xutility>
+#include<xutility>
 #include<queue>
 #include<cassert>
 #include<functional>
@@ -20,15 +20,86 @@
 #include <algorithm>
 #include<stack>
 #include<array>
-#include "pprint.h"
-#include "leetcode.h"
-//#include <boost/describe.hpp>
-//#include <boost/mp11.hpp>
-//#include <boost/json.hpp>
-//#include <boost/type_traits.hpp>
-//#include <boost/utility/string_view.hpp>
+#include "lc.h"
+//#include"trace.h"
 using namespace std;
 using namespace lc;
+using std::string;
+using std::vector;
+using std::priority_queue;
+using std::function;
+
+//cui begin
+#define LOCAL
+template <typename A, typename B>
+ostream& operator <<(ostream& out, const pair<A, B>& a) {
+  out << "(" << a.first << "," << a.second << ")";
+  return out;
+}
+template <typename T, size_t N>
+ostream& operator <<(ostream& out, const array<T, N>& a) {
+  out << "["; bool first = true;
+  for (auto& v : a) { out << (first ? "" : ", "); out << v; first = 0; } out << "]";
+  return out;
+}
+template <typename T>
+ostream& operator <<(ostream& out, const vector<T>& a) {
+  out << "["; bool first = true;
+  for (auto v : a) { out << (first ? "" : ", "); out << v; first = 0; } out << "]";
+  return out;
+}
+template <typename T, class Cmp>
+ostream& operator <<(ostream& out, const set<T, Cmp>& a) {
+  out << "{"; bool first = true;
+  for (auto& v : a) { out << (first ? "" : ", "); out << v; first = 0; } out << "}";
+  return out;
+}
+template <typename T, class Cmp>
+ostream& operator <<(ostream& out, const multiset<T, Cmp>& a) {
+  out << "{"; bool first = true;
+  for (auto& v : a) { out << (first ? "" : ", "); out << v; first = 0; } out << "}";
+  return out;
+}
+template <typename U, typename T, class Cmp>
+ostream& operator <<(ostream& out, const map<U, T, Cmp>& a) {
+  out << "{"; bool first = true;
+  for (auto& p : a) { out << (first ? "" : ", "); out << p.first << ":" << p.second; first = 0; } out << "}";
+  return out;
+}
+template <typename U, typename T, class Cmp>
+ostream& operator <<(ostream& out, const unordered_map<U, T, Cmp>& a) {
+  out << "{"; bool first = true;
+  for (auto& p : a) { out << (first ? "" : ", "); out << p.first << ":" << p.second; first = 0; } out << "}";
+  return out;
+}
+template <typename... T>
+ostream& operator<<(ostream& out, const tuple<T...>& t) {
+  out << '(';
+  std::apply(
+    [&out](const T &...args) {
+      int index = 0;
+      ((out << args << (++index != sizeof...(T) ? ", " : "")), ...);
+    },
+    t);
+  return out << ')';
+}
+template <typename Arg1>
+void __f(const char* name, Arg1&& arg1) {
+  cerr << name << ": " << arg1 << endl;
+}
+template <typename Arg1, typename... Args>
+void __f(const char* names, Arg1&& arg1, Args&&... args) {
+  const char* comma = strchr(names + 1, ',');
+  cerr.write(names, comma - names) << ": " << arg1 << " |";
+  __f(comma + 1, args...);
+}
+
+#ifdef LOCAL
+#define trace(...) __f(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define trace(...) 42
+#endif
+//cui end
 
 #ifdef math
 const double pi = acos(-1.0);//NOTES:pi 
@@ -80,63 +151,68 @@ bool isIntersect(double x1, double y1, double x2, double y2, double x3, double y
   return crossOper(x1, y1, x2, y2, x3, y3) * crossOper(x1, y1, x2, y2, x4, y4) < 0 && crossOper(x3, y3, x4, y4, x1, y1) * crossOper(x3, y3, x4, y4, x2, y2) < 0;
 }
 #endif
-
-#define ice
-#ifdef ice
-typedef long long ll;
-typedef vector<int> vi;
-typedef vector<vi> vii;
-typedef vector<string> vs;
-typedef vector<vs> vss;
-typedef pair<int, int> PII;
-#define all(c) c.begin(), c.end()
-#define rall(c) c.rbegin(), c.rend()
-#define sz(a) int((a).size())
-#define tr(c, i) for (typeof(c).begin() i = c.begin(); i != c.end(); i++)
-#define loop(i,a,b) for (int i = a; i <= b; i++)
-#define loop2(x, n,step) for(int x = 0; x < n; x+=step)
-constexpr int mod = 1e9 + 7;
-template<class T> inline T lowbit(T n) { return (n ^ (n - 1)) & n; }  // 6(110)->2(10)
-template<class T> inline int countbit(T n) { return (n == 0) ? 0 : (1 + countbit(n & (n - 1))); }//1 in binary represent
-
+//不常用
+#define spice
+#ifdef spice
+template<class T> inline T lowbit(T n) { return (n ^ (n - 1)) & n; }  // 6(110)->2(10
 template <class T, class S, class C>
 S& Container(priority_queue<T, S, C>& q) {
-struct HackedQueue : private priority_queue<T, S, C>{
-    static S& Container(priority_queue<T, S, C>& q){
+  struct HackedQueue : private priority_queue<T, S, C> {
+    static S& Container(priority_queue<T, S, C>& q) {
       return q.* & HackedQueue::c;;
     }
   };
   return HackedQueue::Container(q);
 }
-vector<int> print(priority_queue<int> pq) {
+template<typename T>
+vector<T> print(priority_queue<T> pq) {
   auto res = Container(pq);
   return res;
 }
-
 template<typename T> void UN(T& n) { sort(all(n)); n.erase(std::unique(n.begin(), n.end()), n.end()); }
 template<class T> using pqg = priority_queue<T, vector<T>, greater<T>>; //Small root heap. Default is big root heap.
-const vector<vector<int>> dirs{ {0, 1},{-1, 0} , {0, -1}, {1, 0}, }; //{y,x}:right, down, left, up
+const vector<vector<int>> d4{ {0, 1}, { -1, 0 }, { 0, -1 }, { 1, 0 }, }; //{y,x}:right, down, left, up
+const int d8[8][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, -1}, {1, -1}, {-1, 1} };
 
-//customize
-#define psum(x,y)  partial_sum(all(x), y.begin());
-#define D(x) cout << #x << " : " << x << endl;
-#define ed cout << endl;
-#define  sw cout<< l <<" "<<r<<endl; //sliding window 
-#define rt  return res;
+#define D(x) cout << #x << " : " << x << "\n";
 #endif
+
+///常用
+
 //#define D(x); 
-
-typedef long long ll;
-typedef vector<int> vi;
+using ll = long long;
+using vi = vector<int>;
+using vii = vector<vi>;
+using vl = vector<ll>;
+using vll = vector<vl>;
+using vs = vector<string>;
+using vss = vector<vs>;
+using ii = pair<int, int>;
 #define all(c) c.begin(), c.end()
-#define rall(c) c.rbegin(), c.rend()
-#define sz(a) int((a).size())
+#define rall(c) c.rbegin(), c.rend()   
+#define sz(a) int((a).size())   
 #define psum(x,y)  partial_sum(all(x), y.begin());
-typedef vector<int> vi;
-typedef vector<vi> vii;
-//#define ed ;
+#define ext(container, element)(container.find(element) != container.end())
+#define cext(container, element)(find(all(container), element) != container.end())
+#define loop(i,a,b) for (int i = a; i < b; i++)
+#define loop2(x, n,step) for(int x = 0; x < n; x+=step)
+#define rt  return res;
+#define ed cout<<'\n';
+#define D2(x) cout <<  x << endl;
+constexpr int MOD = 1e9 + 9;
+template <typename T> static constexpr T inf = numeric_limits<T>::max() / 2;
 
-// template <typename... Ts> auto xxx(Ts&& ... ts) { return func(std::forward<Ts>(ts)...); }
-class Solution {
-  // your solution here...
-};
+inline void add_mod(int& x, int y) { x += y; if (x >= MOD) x -= MOD; }
+inline void sub_mod(int& x, int y) { x += MOD - y; if (x >= MOD) x -= MOD; }
+inline int mod(int x) { return x >= MOD ? x - MOD : x; }
+template <class T> bool ckmin(T& a, const T& b) { return b < a ? a = b, 1 : 0; }
+template <class T> bool ckmax(T& a, const T& b) { return a < b ? a = b, 1 : 0; }
+//usage:
+// if(a[i] < currMin){ currMin = a[i]; ans++; }
+// equal to :if (ckmin(currMin, a[i])) ans++;
+//1:0 is return value for the if,
+//ps:这帮人真是一行代码也舍不得多写啊.
+template <class T> auto vect(const T& v, int n) { return vector<T>(n, v); }
+template <class T, class... D> auto vect(const T& v, int n, D... m) {
+  return vector<decltype(vect(v, m...))>(n, vect(v, m...));
+}

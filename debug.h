@@ -30,6 +30,7 @@ using std::function;
 //Compared to pprint.h
 //advantage : you can put multiple objects in one `debug()`,ie,debug(a,b,c).
 //disadvantage :Poor readability, not as good as trace.h
+
 //From https://github.com/goodStudyTnT/library/blob/master/copypaste/debug.h
 
 string to_string(const string& s) {

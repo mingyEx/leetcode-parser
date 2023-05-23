@@ -1,15 +1,36 @@
+#include<vector>
+#include<string>
+#include<map>
+#include<algorithm>	
+#include <unordered_map>
+#include<iostream>
+#include<bitset>
+#include<algorithm>
+#include<fstream>
+#include<numeric>
+#include<xutility>
+#include<queue>
+#include<cassert>
+#include<functional>
+#include<cctype>
+#include<iomanip>
+#include<bit>
+#include<tuple>
+#include <random>
+#include <algorithm>
+#include<stack>
+#include<array>
+#include<sstream>
+using namespace std;
+using std::string;
+using std::vector;
+using std::priority_queue;
+using std::function;
+
 //Compared to pprint.h
-//The advantage is that you can put multiple objects in one `debug()`.
-//The disadvantage is that the number of arguments to the tuples requires the user to manually add overloaded functions
+//advantage : you can put multiple objects in one `debug()`,ie,debug(a,b,c).
+//disadvantage :Poor readability, not as good as trace.h
 //From https://github.com/goodStudyTnT/library/blob/master/copypaste/debug.h
-template <typename A, typename B>
-string to_string(pair<A, B> p);
-
-template <typename A, typename B, typename C>
-string to_string(tuple<A, B, C> p);
-
-template <typename A, typename B, typename C, typename D>
-string to_string(tuple<A, B, C, D> p);
 
 string to_string(const string& s) {
   return '"' + s + '"';
@@ -46,6 +67,7 @@ string to_string(bitset<N> v) {
   return res;
 }
 
+//from https://github.com/ftiasch/shoka/blob/master/debug.h#L32
 template <typename A>
 string to_string(A v) {
   bool first = true;
@@ -60,20 +82,23 @@ string to_string(A v) {
   res += "}";
   return res;
 }
+template <typename... T>
+string to_string(const tuple<T...>& t) {
+  stringstream ss;
+  ss << '(';
+  std::apply(
+    [&ss](const T &...args) {
+      int index = 0;
+      ((ss << to_string(args) << (++index != sizeof...(T) ? ", " : "")), ...);
+    },
+    t);
+  ss << ")";
+  return ss.str();
+}
 
 template <typename A, typename B>
 string to_string(pair<A, B> p) {
   return "(" + to_string(p.first) + ", " + to_string(p.second) + ")";
-}
-
-template <typename A, typename B, typename C>
-string to_string(tuple<A, B, C> p) {
-  return "(" + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ")";
-}
-
-template <typename A, typename B, typename C, typename D>
-string to_string(tuple<A, B, C, D> p) {
-  return "(" + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ", " + to_string(get<3>(p)) + ")";
 }
 
 void debug_out() {
@@ -85,19 +110,13 @@ void debug_out(Head H, Tail... T) {
   cerr << " " << to_string(H);
   debug_out(T...);
 }
-// It is a template version of [this](https://codeforces.com/blog/entry/91347?#comment-798869) one, and we advocate using fewer macros!
+
 #define debug(...) cerr << "[" << #__VA_ARGS__ << "]:", debug_out(__VA_ARGS__)
 
 int main()
 {
-  string sa = "shashai";
-  //map<int,int> sc;
-  //for (int i = 0; i < 10; ++i)
-  //{
-  //  sc[i] = i;
-  //}
-  tuple<int, int, int, int, int>sc = { 1,2,3,4,5 }; //error!
-  debug(sa,sc);
+  tuple<int, int, int>sc = { 1,2,3}; //error!
+  tuple<int, int, int, int, int, int, int>sd = { 1,2,3,2,3,2,3 }; //error!
+  debug (sc);
+  debug(sd);
 }
-
-//todo:Add printers for tuples that support an arbitrary number of parameters with [this](https://github.com/ftiasch/shoka/blob/master/debug.h#L32)

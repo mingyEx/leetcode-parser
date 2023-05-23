@@ -99,3 +99,5 @@ int main()
   tuple<int, int, int, int, int>sc = { 1,2,3,4,5 }; //error!
   debug(sa,sc);
 }
+
+//todo:Add printers for tuples that support an arbitrary number of parameters with [this](https://github.com/ftiasch/shoka/blob/master/debug.h#L32)

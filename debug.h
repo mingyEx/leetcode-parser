@@ -1,4 +1,3 @@
-
 //Compared to pprint.h
 //The advantage is that you can put multiple objects in one `debug()`.
 //The disadvantage is that the number of arguments to the tuples requires the user to manually add overloaded functions

@@ -68,7 +68,6 @@ string to_string(bitset<N> v) {
   return res;
 }
 
-//from https://github.com/ftiasch/shoka/blob/master/debug.h#L32
 template <typename A>
 string to_string(A v) {
   bool first = true;
@@ -83,6 +82,8 @@ string to_string(A v) {
   res += "}";
   return res;
 }
+
+//from https://github.com/ftiasch/shoka/blob/master/debug.h#L32
 template <typename... T>
 string to_string(const tuple<T...>& t) {
   stringstream ss;

@@ -95,9 +95,9 @@ void __f(const char* names, Arg1&& arg1, Args&&... args) {
 }
 
 #ifdef LOCAL
-#define trace(...) __f(#__VA_ARGS__, __VA_ARGS__)
+#define D(...) __f(#__VA_ARGS__, __VA_ARGS__)
 #else
-#define trace(...) 42
+#define D(...) 42
 #endif
 //cui end
 
@@ -174,7 +174,7 @@ template<class T> using pqg = priority_queue<T, vector<T>, greater<T>>; //Small 
 const vector<vector<int>> d4{ {0, 1}, { -1, 0 }, { 0, -1 }, { 1, 0 }, }; //{y,x}:right, down, left, up
 const int d8[8][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, -1}, {1, -1}, {-1, 1} };
 
-#define D(x) cout << #x << " : " << x << "\n";
+//#define D(x) cout << #x << " : " << x << "\n";
 #endif
 
 ///常用

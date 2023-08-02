@@ -95,7 +95,7 @@ void __f(const char* names, Arg1&& arg1, Args&&... args) {
 }
 
 #ifdef LOCAL
-#define D(...) __f(#__VA_ARGS__, __VA_ARGS__)
+#define D(...) __f(#__VA_ARGS__, __VA_ARGS__);
 #else
 #define D(...) 42
 #endif

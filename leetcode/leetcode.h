@@ -34,6 +34,26 @@ namespace lc
   public:
     List(const std::string& inputStr);
     List(ListNode* p) { head = copy(p); };
+    List(const List& other) {
+      head = copy(other.head);
+      //https://stackoverflow.com/a/7396881/13792395
+      // In member methods of class A, all the members of (object/pointer and static member) class A can be accessed.
+      //It's easy to forget things I don't use often...
+    }
+    List(List&& other)
+    {
+      std::swap(other.head, head);
+    }
+    List& operator=(const List& other)
+    {
+      head = copy(other.head);
+      return *this;
+    }
+    List& operator=(List&& other) //for List object=(ListNode*)p
+    {
+      std::swap(other.head, head);
+      return *this;
+    }
     ~List();
     void print();
     auto get() { return head; }
@@ -88,9 +108,10 @@ namespace lc
       ret.push_back(Vec<int>(vec));
       log = match.suffix();
     }
-    if (ret.empty()) { 
+    if (ret.empty()) {
       ret = {};
-      std::cout << "Construct vector<vector<int>>failed" <<std::endl; }
+      std::cout << "Construct vector<vector<int>>failed" << std::endl;
+    }
     return ret;
   }
 
@@ -199,5 +220,5 @@ namespace lc
   };
   void print(TreeNode* p);
   void print(ListNode* p);
-}
+};
 #endif

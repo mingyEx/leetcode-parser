@@ -81,6 +81,7 @@ void lc::Tree::print_Impl(TreeNode* n, bool left, std::string const& indent)
 }
 void lc::Tree::print()
 {
+  if (!root)return;
   if (root->right) print_Impl(root->right, false, " ");
   std::cout << root->val << '\n';
   if (root->left) print_Impl(root->left, true, " ");

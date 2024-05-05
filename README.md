@@ -43,3 +43,8 @@ example:`[[], ["leetcode"], [4], ["practice"], [3], [8], [10], [2], [6]]` in  [2
 [leetcode-playground-stringToString](https://leetcode.cn/playground/new/empty)  
 For recursive problems, you may like [it](https://github.com/mohsenmahroos/tracer) very much   
 there is a [better one](https://github.com/old-yan/CP-template/blob/main/IO/LeetcodeIO.md)
+  
+1.online graph tools    
+https://csacademy.com/app/graph_editor/    
+https://silverfoxxxy.github.io/graph_editor/    
+2.[Combinations Calculator (nCr)](https://www.calculatorsoup.com/calculators/discretemathematics/combinations.php)

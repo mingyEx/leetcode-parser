@@ -48,6 +48,23 @@ ostream& operator <<(ostream& out, const vector<T>& a) {
   for (auto v : a) { out << (first ? "" : ", "); out << v; first = 0; } out << "]";
   return out;
 }
+//Append a newline character to the end of each row when outputting a two-dimensional array.
+template <typename U>
+std::ostream& operator <<(std::ostream& out, const std::vector<std::vector<U>>& a) {
+  out << "{";
+  bool first_outer = true;
+  for (int i = 0; i < a.size(); ++i)
+  {
+    auto inner_vec = a[i];
+    out << (first_outer ? "" : " ");
+    out << inner_vec;    //call vector<T>
+    if (i != a.size() - 1) out << "\n";
+    first_outer = false;
+  }
+  out << "}";
+  return out;
+}
+
 template <typename T, class Cmp>
 ostream& operator <<(ostream& out, const set<T, Cmp>& a) {
   out << "{"; bool first = true;
@@ -216,3 +233,4 @@ template <class T> auto vect(const T& v, int n) { return vector<T>(n, v); }
 template <class T, class... D> auto vect(const T& v, int n, D... m) {
   return vector<decltype(vect(v, m...))>(n, vect(v, m...));
 }
+

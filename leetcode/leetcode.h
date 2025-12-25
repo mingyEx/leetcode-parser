@@ -59,7 +59,7 @@ namespace lc
     auto get() { return head; }
   };
 
-  const int32_t TREE_NODE_BOUNDNARY = INT_MIN + 1; // replace null
+  inline const int32_t TREE_NODE_BOUNDNARY = INT_MIN + 1; // replace null
   struct TreeNode
   {
     int val;
@@ -222,3 +222,4 @@ namespace lc
   void print(ListNode* p);
 };
 #endif
+

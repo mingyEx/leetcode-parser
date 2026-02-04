@@ -30,8 +30,8 @@ example:`[[], ["leetcode"], [4], ["practice"], [3], [8], [10], [2], [6]]` in  [2
 
 ### todo
 1.add [inliner](https://github.com/slycelote/caide/blob/release/libcaide/README.md#c-code-inliner)   
-2.use `std::setw(9)`,`cout.width(9)`; to align the output to the right, which helps debug problems with grid
-
+2.use `std::setw(9)`,`cout.width(9)`; to align the output to the right, which helps debug problems with grid  
+3.add ARGS() macro to print all Parameter's name and value, 2026了我们仍然不能靠语言本身来做到这一点！ 不想拖BOOST那一堆，待会我去拆[别人的](https://github.com/old-yan/CP-template/blob/main/IO/LeetcodeIO.md)
 ### Any feature improvement suggestions are welcome
 
 

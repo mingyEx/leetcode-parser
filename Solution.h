@@ -100,6 +100,24 @@ ostream& operator<<(ostream& out, const tuple<T...>& t) {
     t);
   return out << ')';
 }
+//for raw array
+template <size_t R, size_t C>
+ostream& operator<<(ostream& out, int(&arr)[R][C]) {
+  for (size_t i = 0; i < R; ++i) {
+	for (size_t j = 0; j < C; ++j) {
+	  out << arr[i][j] << " ";
+	}
+	out << "\n";
+  }
+  return out << "\n";
+}
+//usage:
+//const int a = 2;
+//const int b = 3;
+//int arr[a][b];
+//arr[1][2] = 234;
+//D(arr);
+
 template <typename Arg1>
 void __f(const char* name, Arg1&& arg1) {
   cerr << name << ": " << arg1 << endl;
@@ -233,4 +251,5 @@ template <class T> auto vect(const T& v, int n) { return vector<T>(n, v); }
 template <class T, class... D> auto vect(const T& v, int n, D... m) {
   return vector<decltype(vect(v, m...))>(n, vect(v, m...));
 }
+
 

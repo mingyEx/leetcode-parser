@@ -1,1 +1,1 @@
-add_library(leetcode leetcode.cpp)
+add_library(leetcode lc.cpp)

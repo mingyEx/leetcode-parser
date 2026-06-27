@@ -1,4 +1,4 @@
-#include "leetcode.h"
+#include "lc.h"
 using namespace std;
 using namespace lc;
 

@@ -8,7 +8,7 @@
 #include<algorithm>
 #include<fstream>
 #include<numeric>
-#include<xutility>
+#include <utility>
 #include<queue>
 #include<cassert>
 #include<functional>
@@ -20,6 +20,7 @@
 #include <algorithm>
 #include<stack>
 #include<array>
+#include<cstring>
 #include "lc.h"
 //#include"trace.h"
 using namespace std;
@@ -252,5 +253,13 @@ template <class T, class... D> auto vect(const T& v, int n, D... m) {
   return vector<decltype(vect(v, m...))>(n, vect(v, m...));
 }
 
+class Solution {
+  public:
+  int foo() {
+    cout<<"hello,carlos!"<<endl;
+    return 0;
+  }
+
+};
 
 

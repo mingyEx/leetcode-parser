@@ -2,9 +2,20 @@
 cmake_minimum_required(VERSION 3.10)
 
 if (UNIX)
-  set(CMAKE_C_COMPILER /usr/bin/gcc-10)
-  set(CMAKE_CXX_COMPILER /usr/bin/g++-10)
-endif (UNIX)
+    file(GLOB GCC_LIST "/usr/bin/gcc-[0-9]*")
+    list(SORT GCC_LIST COMPARE NATURAL ORDER DESCENDING)
+
+    if (GCC_LIST)
+        list(GET GCC_LIST 0 GCC_LATEST)
+        string(REGEX REPLACE ".*/gcc-([0-9]+)$" "\\1" GCC_VER "${GCC_LATEST}")
+        set(GXX_LATEST "/usr/bin/g++-${GCC_VER}")
+
+        if (EXISTS "${GXX_LATEST}")
+            set(CMAKE_C_COMPILER "${GCC_LATEST}" CACHE FILEPATH "" FORCE)
+            set(CMAKE_CXX_COMPILER "${GXX_LATEST}" CACHE FILEPATH "" FORCE)
+        endif()
+    endif()
+endif()
 
 project(leetcode_parser)
 

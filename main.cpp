@@ -18,7 +18,7 @@
 #include<cctype>
 #include "pprint.h"
 #include "Solution.h"
-#include"leetcode.h"
+#include"lc.h"
 using namespace std;
 using namespace lc;
 auto string_to_char(vector<string>& t1)
@@ -50,12 +50,14 @@ int main(int argc, char* argv[])
   std::string in;
   std::getline(file, in);
   int caseN = 0;
-  while (file.peek() != EOF)
-  {
-    cout << "case " << caseN << ":"<<endl;
-    std::getline(file, in);
-    auto t1 = Vec<int>(in);
-    //cout << Solution().swapNodes(t1.get(), 2) << endl;
-  }
+  // while (file.peek() != EOF)
+  // {
+  //   cout << "case " << caseN << ":"<<endl;
+  //   std::getline(file, in);
+  //   auto t1 = Vec<int>(in);
+  //   //cout << Solution().swapNodes(t1.get(), 2) << endl;
+  // }
+  Solution sol;
+  sol.foo();
   return 0;
 }
